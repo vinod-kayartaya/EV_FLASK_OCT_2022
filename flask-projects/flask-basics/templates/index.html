@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Addressbook App</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/yeti/bootstrap.min.css">
+</head>
+<body>
+
+    <div class="alert alert-primary">
+        <div class="container">
+            <h1>Addressbook App</h1>
+        </div>
+    </div>
+    <div class="container">
+        <p class="lead">Created by Vinod, powered by Flask</p>
+
+        <a href="/" class="btn btn-link">Home</a>
+        <a href="/contact-list" class="btn btn-link">Contacts</a>
+        <a href="/add-new-contact" class="btn btn-link">Add new contact</a>
+        <a href="/about-us" class="btn btn-link">About us</a>
+    </div>
+
+    <div class="container">
+        {% block main %}
+        <h3>Welcome home</h3>
+        {% endblock %}
+    </div>
+</body>
+</html>

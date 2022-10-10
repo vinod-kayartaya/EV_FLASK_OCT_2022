@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block main %}
+<h3>Here are your contacts:</h3>
+
+<ul>
+    {% for c in contacts: %}
+    <li>Name: {{ c['name'] }}, Email: {{ c['email'] }}, Phone: {{ c['phone'] }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
