@@ -106,11 +106,76 @@ Accept: text/csv
 
 ###
 
-GET /api/products/122 HTTP/1.1
+GET /api/products/12 HTTP/1.1
 Host: localhost:8080
 Accept: application/json
 ###
 
-GET /api/products/122 HTTP/1.1
+GET /api/products/12 HTTP/1.1
 Host: localhost:8080
 Accept: application/xml
+###
+
+GET /api/products HTTP/1.1
+Host: localhost:8080
+Accept: text/csv
+
+###
+
+POST /api/products 
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+{
+  "category": "vegetable",
+  "name": "Chillies new",
+  "brand": "KVinod",
+  "description": "New Chillies big - Grade A",
+  "quantity_per_unit": "100 GM",
+  "unit_price": 15,
+  "picture": "https://vinbasket.herokuapp.com/product-images/10000081_15-fresho-chilli-green-big-grade-a.jpg",
+  "discount": 5
+}
+
+###
+POST /api/products 
+Host: localhost:8080
+Content-Type: application/xml
+Accept: application/xml
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<product>
+  <category>vegetable</category>
+  <name>Newest Chillies</name>
+  <brand>Modern</brand>
+  <description>Newest Chillies big - Grade A</description>
+  <quantity_per_unit>100 GM</quantity_per_unit>
+  <unit_price>15</unit_price>
+  <picture>https://vinbasket.herokuapp.com/product-images/10000081_15-fresho-chilli-green-big-grade-a.jpg</picture>
+  <discount>4</discount>
+</product>
+
+###
+
+PATCH /api/products/12
+Host: localhost:8080
+Content-Type: application/json
+Accept: application/json
+
+{
+  "unit_price": 8,
+  "discount": 14
+}
+###
+
+PATCH /api/products/12
+Host: localhost:8080
+Content-Type: application/xml
+Accept: application/xml
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<product>
+  <unit_price>9</unit_price>
+  <discount>2</discount>
+</product>
