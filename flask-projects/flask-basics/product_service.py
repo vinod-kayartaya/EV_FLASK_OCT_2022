@@ -11,16 +11,47 @@ Following operations should be supported:
 We also want to be able to serve different representations (JSON, XML, CSV, Plain text etc)
 """
 
-from flask import Flask
+from flask import Flask, Response, request
 import json
+from dicttoxml2 import dicttoxml
 
 app = Flask(__name__)
 products = []
 
 
+def create_json_response(data, status=200):
+    return Response(json.dumps(data), status=status, mimetype='application/json')
+
+
+def create_xml_response(data, status=200, root_elem='root', item_elem='item'):
+    xml_data = dicttoxml(data, custom_root=root_elem, attr_type=False, item_func=lambda i:item_elem)
+    return Response(xml_data, status=status, mimetype='application/xml')
+
+
+def create_response(data, status=200, root_elem='product-list', item_elem='product'):
+    if request.headers['Accept'] == 'application/xml':
+        return create_xml_response(data, status=status, root_elem=root_elem, item_elem=item_elem)
+    if request.headers['Accept'] == 'application/json':
+        return create_json_response(data, status=status)
+
+    return Response(None, status=406)
+
+
 @app.route('/api/products')
 def handle_get_products():
-    return products
+    return create_response(products)
+
+
+# <converter:variable_name>
+# converter types --> int, float, string, uuid, path
+@app.route('/api/products/<int:product_id>')
+def handle_get_one_product(product_id):
+    result = [p for p in products if p['id'] == product_id]
+    if len(result) == 0:
+        err = dict(message=f'No product found for id {product_id}')
+        return create_response(err, status=404, root_elem='error')
+
+    return create_response(result[0], root_elem='product')
 
 
 if __name__ == '__main__':

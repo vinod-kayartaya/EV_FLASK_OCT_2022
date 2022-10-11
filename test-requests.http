@@ -34,10 +34,10 @@ Accept: text/plain
 
 ###
 
-POST /login
+POST /login HTTP/1.1
 Host: vinbasket.herokuapp.com
 Accept: application/json
-Content-Type: application/json
+Content-Type: application/xml
 
 {"email":"vinod@vinod.co","password":"topsecret"}
 
@@ -67,3 +67,50 @@ Accept: application/xml
 
 ###
 
+GET /api/products
+Host: localhost:8080
+Accept: text/csv
+
+###
+
+
+GET /api/products/678
+Host: localhost:8080
+Accept: application/json
+
+###
+
+POST /api/contacts
+Host: vin-contact-service.herokuapp.com
+Content-Type: application/json
+
+{
+  "firstname": "Vinod",
+  "lastname": "Kumar",
+  "gender": "Male",
+  "email": "vinod@xmpl.com",
+  "phone": "9731424784",
+  "address": "9 Hermina Trail",
+  "city": "Atlanta",
+  "state": "Georgia",
+  "country": "United States",
+  "pincode": "31132",
+  "picture": "https://vin-contact-service.herokuapp.com/images/men/1.jpeg"
+}
+
+###
+
+GET /api/contacts
+Host: vin-contact-service.herokuapp.com
+Accept: text/csv
+
+###
+
+GET /api/products/122 HTTP/1.1
+Host: localhost:8080
+Accept: application/json
+###
+
+GET /api/products/122 HTTP/1.1
+Host: localhost:8080
+Accept: application/xml
