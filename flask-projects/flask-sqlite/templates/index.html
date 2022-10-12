@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://bootswatch.com/5/yeti/bootstrap.min.css"
+        />
+        <title>Customers dashboard</title>
+    </head>
+    <body>
+        <div class="alert alert-primary">
+            <div class="container">
+                <h1>Customer dashboard</h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <h3>List of all customers</h3>
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody id="tbl_customers_tbody"></tbody>
+            </table>
+        </div>
+
+        <script>
+            function loadCustomers() {
+                fetch('http://localhost:8080/api/customers')
+                    .then((resp) => resp.json())
+                    .then((customers) => {
+                        const content = customers
+                            .map(
+                                (c) => `<tr>
+                            <td>${c.firstname} ${c.lastname}</td>
+                            <td>${c.phone}</td>
+                            <td>${c.email}</td>
+                            <td>${c.city}</td>
+                        </tr>`
+                            )
+                            .join('');
+                        document.getElementById(
+                            'tbl_customers_tbody'
+                        ).innerHTML = content;
+                    });
+            }
+
+            loadCustomers();
+        </script>
+    </body>
+</html>
