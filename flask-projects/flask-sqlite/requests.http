@@ -1,5 +1,38 @@
-http://192.168.1.23:8080/api/customers
+http://localhost:8080/api/customers
 
 ###
 
-http://192.168.1.23:8080/api/customers/6efe2898-652f-4636-8f1f-16ed33db5cbe
+GET /api/customers/26d5583c-2d30-45af-a551-d3f464c5d084
+Host: localhost:8080
+Accept: application/json
+
+###
+
+POST /api/customers
+Host: localhost:8080
+Accept: application/json
+Content-Type: application/json
+
+{
+  "firstname": "Vinod",
+  "lastname": "Kumar",
+  "gender": "Male",
+  "email": "vinod@xmpl.com",
+  "phone": "9844083934",
+  "avatar": "https://avatars.githubusercontent.com/u/109946821?v=4"
+}
+###
+
+PATCH /api/customers/26d5583c-2d30-45af-a551-d3f464c5d084
+Host: localhost:8080
+Accept: application/json
+Content-Type: application/json
+
+{
+  "city": "Bengaluru"
+}
+
+###
+DELETE /api/customers/26d5583c-2d30-45af-a551-d3f464c5d084
+Host: localhost:8080
+Accept: application/json

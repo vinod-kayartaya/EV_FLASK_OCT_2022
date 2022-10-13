@@ -1,4 +1,5 @@
 import json
+import datetime
 
 
 class CustomerJsonEncoder(json.JSONEncoder):
@@ -32,7 +33,7 @@ class Customer:
         self.avatar = kwargs.get('avatar')
 
     def __repr__(self) -> str:
-        return r'Customer(id=%r, firstname=%r, lastname=%r, gender=%r, email=%r, phone=%r, address=%r, city=%r, state=%r, country=%r, avatar=%r)' % (self.id, self.firstname, self.lastname, self.gender, self.email, self.phone, self.address, self.city, self.state, self.country, self.avatar)
+        return r'Customer(id=%r, firstname=%r, lastname=%r, gender=%r, email=%r, phone=%r, address=%r, city=%r, state=%r, country=%r, avatar=%r)' % self.get_as_tuple()
 
     @staticmethod
     def from_tuple(vals):
@@ -40,6 +41,13 @@ class Customer:
                 'phone', 'address', 'city', 'state', 'country', 'avatar']
         d1 = dict(zip(keys, vals))
         return Customer(**d1)
+
+    def get_as_tuple(self):
+        return (self.id, self.firstname, self.lastname, self.gender, self.email, self.phone, self.address, self.city, self.state, self.country, self.avatar)
+
+
+def create_error(message):
+    return {'message': message, 'timestamp': str(datetime.datetime.now())}
 
 
 if __name__ == '__main__':
