@@ -1,0 +1,45 @@
+GET /api/books
+Host: localhost:8080
+Accept: application/json
+
+###
+GET /api/books/4
+Host: localhost:8080
+Accept: application/json
+
+###
+
+POST /api/books
+Host: localhost:8080
+Accept: application/json
+Content-Type: application/json
+
+{"title": "Flask-Restful in 1 hour"}
+
+###
+PATCH /api/books/4
+Host: localhost:8080
+Accept: application/json
+Content-Type: application/json
+
+{"author": "Vinod Kumar", "price": 899}
+
+###
+PATCH /api/books/13
+Host: localhost:8080
+Accept: application/json
+Content-Type: application/json
+
+{"price": 349, "id": 123}
+###
+PUT /api/books/4
+Host: localhost:8080
+Accept: application/json
+Content-Type: application/json
+
+{"price": 349, "title": "Flask made easy"}
+
+###
+DELETE /api/books/3
+Host: localhost:8080
+Accept: application/json
