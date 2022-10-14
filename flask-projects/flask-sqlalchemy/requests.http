@@ -1,0 +1,20 @@
+GET /api/customers
+Host: localhost:8080
+Accept: application/json
+
+###
+GET /api/customers/a9075e91-9dce-4a29-821c-491673361a5d
+Host: localhost:8080
+Accept: application/json
+
+###
+POST /api/customers
+Host: localhost:8080
+Accept: application/json
+Content-Type: application/json
+
+{
+    "firstname": "Vinod",
+    "email": "vinod@xmpl.co",
+    "phone": "9731424700"
+}
