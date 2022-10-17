@@ -1,4 +1,5 @@
-from flask import Flask
+from datetime import datetime
+from flask import Flask, request
 from flask_restful import Api, Resource
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
@@ -9,6 +10,10 @@ api = Api(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///customers.sqlite'
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+
+
+def create_error(message):
+    return {'message': message, 'timestamp': str(datetime.now())}
 
 
 # model class that is mapped to a table called "customers"
@@ -60,9 +65,38 @@ customer_list_schema = CustomerSchema(many=True)
 # for handling GET (multiple customers) and POST (one or more customer/s)
 # or DELETE/UPDATE/PATCH of multiple customers (input via payload)
 class CustomerListResource(Resource):
+
+    # supports query by email, phone, or city (in that sequence)
+    # (user is expected to supply only email or phone or city at a time)
     def get(self):
-        print('CustomerListResource.get() called')
-        return None, 200
+
+        # for email and phone search, pagination is not applicable
+        if 'email' in request.args:
+            cust = Customer.query.filter(
+                Customer.email == request.args['email']).first()
+            err = create_error(
+                f'No customer found for email {request.args["email"]}')
+            return (err, 404) if cust is None else (customer_schema.dump(cust), 200)
+
+        if 'phone' in request.args:
+            cust = Customer.query.filter(
+                Customer.phone == request.args['phone']).first()
+            err = create_error(
+                f'No customer found for phone {request.args["phone"]}')
+            return (err, 404) if cust is None else (customer_schema.dump(cust), 200)
+
+        page = int(request.args.get('_page', '1'))
+        limit = int(request.args.get('_limit', '10'))
+        offset = (page-1) * limit
+
+        qry = Customer.query
+        if 'city' in request.args:
+            customers = qry.filter(Customer.city == request.args['city']).limit(
+                limit).offset(offset).all()
+        else:
+            customers = qry.limit(limit).offset(offset).all()
+
+        return customer_list_schema.dump(customers), 200
 
     def post(self):
         print('CustomerListResource.post() called')

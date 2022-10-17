@@ -1,4 +1,27 @@
+GET /api/customers?email=ibidwellc@latimes.com
+Host: localhost:8080
+
+###
+GET /api/customers?phone=9935140783
+Host: localhost:8080
+
+###
+GET /api/customers?city=Santo Niño
+Host: localhost:8080
+###
 GET /api/customers
+Host: localhost:8080
+
+###
+GET /api/customers?_page=3
+Host: localhost:8080
+
+###
+GET /api/customers?_limit=5
+Host: localhost:8080
+
+###
+GET /api/customers?_limit=3&_page=2
 Host: localhost:8080
 
 ###
