@@ -16,7 +16,11 @@ def create_error(message):
     return {'message': message, 'timestamp': str(datetime.now())}
 
 
+method_not_ready_yet = create_error('Method is not yet implemented')
+
 # model class that is mapped to a table called "customers"
+
+
 class Customer(db.Model):
     __tablename__ = 'customers'
     id = db.Column(db.String(250), primary_key=True)
@@ -100,12 +104,12 @@ class CustomerListResource(Resource):
 
     def post(self):
         print('CustomerListResource.post() called')
-        return None, 200
+        return method_not_ready_yet, 601
 
     def delete(self):
         # deletes all customers based on the ids supplied via payload
         print('CustomerListResource.delete() called')
-        return None, 200
+        return method_not_ready_yet, 601
 
 
 class CustomerResource(Resource):
@@ -119,15 +123,15 @@ class CustomerResource(Resource):
 
     def put(self, customer_id):
         print(f'CustomerResource.put({customer_id}) called')
-        return None, 200
+        return method_not_ready_yet, 601
 
     def patch(self, customer_id):
         print(f'CustomerResource.patch({customer_id}) called')
-        return None, 200
+        return method_not_ready_yet, 601
 
     def delete(self, customer_id):
         print(f'CustomerResource.delete({customer_id}) called')
-        return None, 200
+        return method_not_ready_yet, 601
 
 
 # map the CustomerListResource class to a URI
