@@ -71,3 +71,7 @@ Host: example.com
 </envelope>
 
 ```
+
+Trainer: Vinod
+
+Email: vinod@knowledgeworksindia.com or vinod@vinod.co
