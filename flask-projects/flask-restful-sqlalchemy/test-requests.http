@@ -1,0 +1,28 @@
+GET /api/customers
+Host: localhost:8080
+
+###
+
+POST /api/customers
+Host: localhost:8080
+###
+
+DELETE /api/customers
+Host: localhost:8080
+
+###
+GET /api/customers/6efe2898-652f-4636-8f1f-16ed33db5cbd
+Host: localhost:8080
+
+###
+
+PUT /api/customers/6efe2898-652f-4636-8f1f-16ed33db5cbd
+Host: localhost:8080
+###
+
+PATCH /api/customers/6efe2898-652f-4636-8f1f-16ed33db5cbd
+Host: localhost:8080
+###
+
+DELETE /api/customers/6efe2898-652f-4636-8f1f-16ed33db5cbd
+Host: localhost:8080
